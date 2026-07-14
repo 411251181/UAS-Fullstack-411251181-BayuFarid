@@ -519,8 +519,7 @@ Success criteria:
 - architecture direction chosen: preserve Vue architecture, migrate visual layer in batches
 
 ### Pending
-- run build/test after each major batch
-- run `git status` after changes
+- none
 
 ---
 
@@ -622,17 +621,27 @@ Note:
 - derived owner rental monitoring page from same dashboard language with summary stats and richer transaction table
 - refactored rental detail into hero plus audit layout while preserving renter-only return and cancel actions
 - verified Batch 5 with build, tests, and git status
+- completed Batch 6 polish pass in:
+  - `src/components/common/BaseAlert.vue`
+  - `src/components/common/BaseEmpty.vue`
+  - `src/components/common/LoadingSpinner.vue`
+  - `src/assets/styles/main.css`
+- refreshed shared alert, empty, and loading states with stronger hierarchy, icon treatment, and token-consistent surfaces
+- tightened responsive behavior for dashboard headers, action stacks, and shared state blocks on tablet/mobile widths
+- verified Batch 6 with build, tests, and git status
 
 ---
 
 ## 15. Next Recommended Action
-Start Batch 6:
-- polish responsive edge cases across migrated pages
-- restyle remaining empty/loading/error states where needed
-- run final build/test sweep
-- review final `git status` summary
+Roadmap complete.
+
+Final state:
+- Batches 1-6 finished
+- shared UI states polished
+- responsive cleanup applied
+- final build/test sweep passed
+- final `git status` reviewed
 
 Reason:
-- Batch 5 rental pages finished and verified
-- remaining work is consistency cleanup across batches, not new route migration
-- final pass can reuse design tokens and patterns already established in Batches 1-5
+- staged Stitch-style migration finished across planned routes and shared states
+- remaining work, if any, is optional post-roadmap refinement only
