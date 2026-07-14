@@ -60,7 +60,7 @@ select {
   padding: 0.85rem 1rem;
   border-radius: 0.9rem;
   border: 1px solid var(--border);
-  background: rgba(15, 23, 42, 0.7);
+  background: var(--panel);
   color: var(--text);
 }
 
@@ -73,7 +73,14 @@ textarea {
   margin: 0 auto;
 }
 
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .app-main {
+  flex: 1;
   padding: 2rem 0 4rem;
 }
 
@@ -95,6 +102,13 @@ textarea {
   padding: 1rem 0;
 }
 
+.header__brand-group {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-width: 0;
+}
+
 .brand {
   font-size: 1.4rem;
   font-weight: 800;
@@ -107,6 +121,44 @@ textarea {
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+}
+
+.nav a {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.nav a.router-link-active {
+  color: var(--primary);
+}
+
+.nav--primary a {
+  padding-bottom: 0.15rem;
+}
+
+.nav--actions {
+  justify-content: flex-end;
+}
+
+.header__link {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.header__role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: var(--primary-tint);
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 }
 
 .hero,
@@ -327,6 +379,39 @@ textarea {
   border-collapse: collapse;
 }
 
+.app-footer {
+  margin-top: auto;
+  background: var(--panel-soft);
+  border-top: 1px solid var(--border);
+}
+
+.app-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+}
+
+.app-footer__brand {
+  margin: 0 0 0.35rem;
+}
+
+.app-footer__copy {
+  margin: 0;
+  max-width: 28rem;
+}
+
+.app-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .table th,
 .table td {
   text-align: left;
@@ -355,6 +440,22 @@ textarea {
 @media (max-width: 640px) {
   .container {
     width: min(calc(100% - 1rem), var(--max-width));
+  }
+
+  .app-main {
+    padding: 1.25rem 0 3rem;
+  }
+
+  .header__inner,
+  .header__brand-group,
+  .app-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav--actions,
+  .app-footer__links {
+    justify-content: flex-start;
   }
 
   .hero,

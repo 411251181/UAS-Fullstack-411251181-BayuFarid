@@ -590,14 +590,24 @@ Note:
 - identified main mismatch: current app functional, but still dark/custom and structurally simpler than Stitch
 - chose staged migration path using existing Vue/CSS architecture
 - created this tracking document for next-agent continuity
+- completed Batch 1 baseline shell work in:
+  - `src/assets/styles/main.css`
+  - `src/components/layout/AppHeader.vue`
+  - `src/components/layout/AppShell.vue`
+- switched global visual system to light Stitch-style baseline
+- added responsive shared footer and refined top navigation grouping
+- fixed input surfaces so forms now match light shell direction
 
 ---
 
 ## 15. Next Recommended Action
-Start Batch 1:
-- convert `src/assets/styles/main.css` from dark theme to Stitch-based light token system
-- restyle shared layout shell before page-by-page refactor
+Start Batch 2:
+- refactor `src/views/items/PublicItemsView.vue`
+- refactor `src/components/items/ItemCard.vue`
+- refactor `src/views/items/ItemDetailView.vue`
+- adjust rental UI presentation only where needed to match reference structure
 
 Reason:
-- every page depends on global tokens and layout primitives
-- avoids repeated one-off styling patches later
+- Batch 1 baseline shell finished
+- public discovery flow now highest-priority visible gap versus reference
+- item catalog and item detail carry strongest Stitch reference coverage
