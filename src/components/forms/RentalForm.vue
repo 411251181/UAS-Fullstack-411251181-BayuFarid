@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import BaseAlert from '../common/BaseAlert.vue';
 
 const props = defineProps({
@@ -52,11 +52,15 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  errorMessage: {
+    type: String,
+    default: '',
+  },
 });
 
 const emit = defineEmits(['submit']);
 const loading = ref(false);
-const errorMessage = ref('');
+const errorMessage = ref(props.errorMessage);
 const today = new Date().toISOString().split('T')[0];
 const form = reactive({
   quantity: 1,
@@ -64,21 +68,22 @@ const form = reactive({
   endDate: today,
 });
 
+watch(
+  () => props.errorMessage,
+  (value) => {
+    errorMessage.value = value;
+    loading.value = false;
+  },
+);
+
 const submitForm = async () => {
   errorMessage.value = '';
   loading.value = true;
-
-  try {
-    await emit('submit', {
-      itemId: props.itemId,
-      quantity: Number(form.quantity),
-      startDate: form.startDate,
-      endDate: form.endDate,
-    });
-  } catch (error) {
-    errorMessage.value = error.message;
-  } finally {
-    loading.value = false;
-  }
+  emit('submit', {
+    itemId: props.itemId,
+    quantity: Number(form.quantity),
+    startDate: form.startDate,
+    endDate: form.endDate,
+  });
 };
 </script>

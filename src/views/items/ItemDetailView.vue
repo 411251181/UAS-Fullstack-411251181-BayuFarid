@@ -65,6 +65,7 @@
             v-if="canRent"
             :item-id="Number(item.id)"
             :max-stock="Number(item.stock)"
+            :error-message="rentalErrorMessage"
             @submit="handleCreateRental"
           />
           <div v-else class="item-detail-access-note">
@@ -122,6 +123,7 @@ const item = ref(null);
 const loading = ref(true);
 const errorMessage = ref('');
 const successMessage = ref('');
+const rentalErrorMessage = ref('');
 
 const canRent = computed(() => (
   authStore.isAuthenticated
@@ -157,12 +159,15 @@ const loadItem = async () => {
 };
 
 const handleCreateRental = async (payload) => {
+  rentalErrorMessage.value = '';
+  successMessage.value = '';
+
   try {
     const response = await createRentalRequest(payload);
     successMessage.value = response.message;
     router.push(`/rentals/${response.data.id}`);
   } catch (error) {
-    throw new Error(extractApiError(error));
+    rentalErrorMessage.value = extractApiError(error);
   }
 };
 
