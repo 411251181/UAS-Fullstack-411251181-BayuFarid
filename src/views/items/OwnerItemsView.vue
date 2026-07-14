@@ -83,20 +83,20 @@
           </thead>
           <tbody>
             <tr v-for="row in items" :key="row.id">
-              <td>
+              <td data-label="Barang">
                 <div class="owner-table__item">
                   <strong>{{ row.name }}</strong>
                   <span>{{ row.category }}</span>
                 </div>
               </td>
-              <td>
+              <td data-label="Status">
                 <span :class="['item-chip', row.status === 'AVAILABLE' ? 'item-chip--success' : 'item-chip--muted']">
                   {{ row.status }}
                 </span>
               </td>
-              <td>{{ formatCurrency(row.dailyPrice) }}</td>
-              <td>{{ row.stock }}</td>
-              <td>
+              <td data-label="Harga/Hari">{{ formatCurrency(row.dailyPrice) }}</td>
+              <td data-label="Stok">{{ row.stock }}</td>
+              <td data-label="Aksi">
                 <div class="actions actions--inline">
                   <button class="btn btn--ghost btn--small" type="button" @click="startEdit(row)">Edit</button>
                   <button class="btn btn--danger btn--small" type="button" @click="handleDelete(row.id)">Hapus</button>

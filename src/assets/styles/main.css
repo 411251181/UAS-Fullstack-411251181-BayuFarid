@@ -102,6 +102,12 @@ textarea {
   margin: 0 auto;
 }
 
+html,
+body,
+#app {
+  overflow-x: clip;
+}
+
 .app-shell {
   min-height: 100vh;
   display: flex;
@@ -139,6 +145,9 @@ textarea {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -150,6 +159,7 @@ textarea {
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+  min-width: 0;
 }
 
 .nav a {
@@ -157,6 +167,12 @@ textarea {
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.04em;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
 .nav a.router-link-active {
@@ -193,6 +209,7 @@ textarea {
 .header__role-badge {
   display: inline-flex;
   align-items: center;
+  gap: 0.35rem;
   padding: 0.4rem 0.75rem;
   border-radius: 999px;
   background: var(--primary-tint);
@@ -328,6 +345,13 @@ textarea {
   font-size: 0.92rem;
 }
 
+.btn--icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
 .form,
 .grid,
 .item-card,
@@ -361,6 +385,13 @@ textarea {
   font-weight: 700;
 }
 
+.catalog-stat-inline,
+.item-discovery-card__meta-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .actions {
   display: flex;
   gap: 0.75rem;
@@ -378,6 +409,13 @@ textarea {
 
 .grid--catalog {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.catalog-page > *,
+.item-detail-page > *,
+.owner-dashboard > *,
+.auth-split-layout > * {
+  min-width: 0;
 }
 
 .price,
@@ -415,6 +453,35 @@ textarea {
 .catalog-hero {
   grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.95fr);
   align-items: stretch;
+}
+
+.catalog-page h1,
+.item-detail-page h1,
+.owner-dashboard h1,
+.auth-split-layout h1 {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.catalog-page h2,
+.item-detail-page h2,
+.owner-dashboard h2,
+.auth-split-layout h2 {
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.catalog-page h3,
+.item-detail-page h3,
+.owner-dashboard h3,
+.auth-split-layout h3,
+.owner-table td,
+.rental-history-card strong,
+.meta-grid dd,
+.item-detail-owner-grid dd {
+  overflow-wrap: anywhere;
 }
 
 .catalog-hero__content,
@@ -558,6 +625,13 @@ textarea {
   gap: 0.75rem;
   overflow-x: auto;
   padding-bottom: 0.15rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.catalog-chip-row::-webkit-scrollbar,
+.nav::-webkit-scrollbar {
+  display: none;
 }
 
 .catalog-chip {
@@ -1115,6 +1189,10 @@ textarea {
   overflow: hidden;
 }
 
+.owner-table td {
+  overflow-wrap: anywhere;
+}
+
 .owner-table-shell__header {
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
@@ -1331,7 +1409,7 @@ textarea {
   }
 
   .app-main {
-    padding: 1.25rem 0 3rem;
+    padding: 1rem 0 3rem;
   }
 
   .header__inner,
@@ -1339,6 +1417,42 @@ textarea {
   .app-footer__inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .header__inner,
+  .header__brand-group,
+  .nav,
+  .nav--primary,
+  .nav--actions,
+  .app-footer__links {
+    width: 100%;
+  }
+
+  .header__inner {
+    gap: 0.85rem;
+    padding: 0.85rem 0;
+  }
+
+  .header__brand-group {
+    gap: 0.85rem;
+  }
+
+  .brand {
+    font-size: 1.15rem;
+  }
+
+  .nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.1rem;
+  }
+
+  .nav-link,
+  .header__role-badge,
+  .header__link,
+  .nav--actions .btn,
+  .nav--actions > * {
+    flex: 0 0 auto;
   }
 
   .nav--actions,
@@ -1354,13 +1468,41 @@ textarea {
   .catalog-cta,
   .rental-form-panel,
   .item-detail-sticky-bar,
-  .auth-split-layout__content {
+  .auth-split-layout__content,
+  .auth-panel-shell {
     padding: 1rem;
+  }
+
+  .catalog-page,
+  .item-detail-page,
+  .owner-dashboard,
+  .auth-split-layout,
+  .rental-history-list,
+  .item-detail-content,
+  .rental-detail-content {
+    gap: 1rem;
+  }
+
+  .catalog-hero__content,
+  .catalog-hero__preview,
+  .catalog-cta,
+  .item-detail-hero,
+  .owner-table-shell__header,
+  .rental-history-card,
+  .rental-history-card__main {
+    gap: 0.85rem;
   }
 
   .catalog-highlight-grid,
   .item-detail-stat-row,
-  .item-discovery-card__meta-row {
+  .item-discovery-card__meta-row,
+  .owner-stats-grid,
+  .auth-role-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid--cards,
+  .grid--catalog {
     grid-template-columns: 1fr;
   }
 
@@ -1371,8 +1513,26 @@ textarea {
   .item-form-panel__footer,
   .rental-history-card__summary,
   .rental-history-card__actions,
-  .alert {
+  .auth-form-panel__footer,
+  .rental-form-panel__footer,
+  .alert,
+  .item-discovery-card__footer {
     align-items: stretch;
+  }
+
+  .item-discovery-card__footer > *,
+  .catalog-hero__actions > *,
+  .actions--wrap > *,
+  .rental-history-card__actions > *,
+  .auth-form-panel__footer > *,
+  .rental-form-panel__footer > * {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .catalog-toolbar__summary {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .rental-history-card__actions,
@@ -1405,6 +1565,18 @@ textarea {
     padding: 1rem;
   }
 
+  .item-discovery-card__heading-row,
+  .item-detail-hero__title-row,
+  .rental-form-panel__summary,
+  .catalog-toolbar__summary {
+    grid-template-columns: 1fr;
+  }
+
+  .item-detail-sticky-bar {
+    bottom: 0.5rem;
+    border-radius: 1rem;
+  }
+
   .table,
   .table thead,
   .table tbody,
@@ -1425,7 +1597,18 @@ textarea {
   }
 
   .table td {
-    padding: 0.35rem 0;
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.5rem 0;
     border-bottom: 0;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 }

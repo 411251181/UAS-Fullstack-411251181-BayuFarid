@@ -59,24 +59,24 @@
         </thead>
         <tbody>
           <tr v-for="row in rentals" :key="row.id">
-            <td>
+            <td data-label="Barang">
               <div class="owner-table__item">
                 <strong>{{ row.item.name }}</strong>
                 <span>{{ row.item.category }} · {{ row.quantity }} unit</span>
               </div>
             </td>
-            <td>
+            <td data-label="Penyewa">
               <div class="owner-table__item">
                 <strong>{{ row.renter.name }}</strong>
                 <span>{{ row.renter.email }}</span>
               </div>
             </td>
-            <td>{{ formatDate(row.startDate) }} - {{ formatDate(row.endDate) }}</td>
-            <td>
+            <td data-label="Periode">{{ formatDate(row.startDate) }} - {{ formatDate(row.endDate) }}</td>
+            <td data-label="Status">
               <span :class="['item-chip', statusChipClass(row.status)]">{{ row.status }}</span>
             </td>
-            <td>{{ formatCurrency(row.totalPrice) }}</td>
-            <td>
+            <td data-label="Total">{{ formatCurrency(row.totalPrice) }}</td>
+            <td data-label="Aksi">
               <RouterLink class="btn btn--ghost btn--small" :to="`/rentals/${row.id}`">Lihat</RouterLink>
             </td>
           </tr>

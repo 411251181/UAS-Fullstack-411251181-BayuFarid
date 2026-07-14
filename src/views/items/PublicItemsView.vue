@@ -4,7 +4,10 @@
       <div class="catalog-hero__content">
         <div class="stack-lg">
           <div class="stack-lg">
-            <p class="eyebrow">Eco-Share Catalog</p>
+            <p class="eyebrow">
+              <LayoutGrid :size="14" />
+              <span>Eco-Share Catalog</span>
+            </p>
             <div class="stack-lg">
               <div>
                 <h1>Temukan elektronik siap pakai untuk kebutuhan harian</h1>
@@ -21,15 +24,24 @@
 
           <div class="catalog-highlight-grid">
             <div class="catalog-highlight-card">
-              <span class="catalog-highlight-card__value">{{ availableCount }}</span>
+              <span class="catalog-highlight-card__value">
+                <PackageCheck :size="18" />
+                <span>{{ availableCount }}</span>
+              </span>
               <span class="catalog-highlight-card__label">Barang tersedia</span>
             </div>
             <div class="catalog-highlight-card">
-              <span class="catalog-highlight-card__value">{{ ownerCount }}</span>
+              <span class="catalog-highlight-card__value">
+                <Store :size="18" />
+                <span>{{ ownerCount }}</span>
+              </span>
               <span class="catalog-highlight-card__label">Owner aktif</span>
             </div>
             <div class="catalog-highlight-card">
-              <span class="catalog-highlight-card__value">{{ categoryCount }}</span>
+              <span class="catalog-highlight-card__value">
+                <Tags :size="18" />
+                <span>{{ categoryCount }}</span>
+              </span>
               <span class="catalog-highlight-card__label">Kategori tercatat</span>
             </div>
           </div>
@@ -51,11 +63,17 @@
         <div class="catalog-hero__preview-meta">
           <div>
             <span>Harga mulai</span>
-            <strong>{{ featuredPrice }}</strong>
+            <strong class="catalog-stat-inline">
+              <Wallet :size="16" />
+              <span>{{ featuredPrice }}</span>
+            </strong>
           </div>
           <div>
             <span>Stok</span>
-            <strong>{{ featuredStock }}</strong>
+            <strong class="catalog-stat-inline">
+              <Boxes :size="16" />
+              <span>{{ featuredStock }}</span>
+            </strong>
           </div>
         </div>
       </div>
@@ -75,9 +93,9 @@
         </button>
       </div>
       <div class="catalog-toolbar__summary muted">
-        <span>{{ filteredItems.length }} barang tampil</span>
+        <span class="catalog-stat-inline"><ScanSearch :size="14" /><span>{{ filteredItems.length }} barang tampil</span></span>
         <span>•</span>
-        <span>{{ availableCount }} siap dirental</span>
+        <span class="catalog-stat-inline"><CheckCircle2 :size="14" /><span>{{ availableCount }} siap dirental</span></span>
       </div>
     </section>
 
@@ -91,7 +109,10 @@
     <template v-else>
       <section class="section-heading section-heading--row">
         <div>
-          <p class="eyebrow">Pilihan perangkat</p>
+          <p class="eyebrow">
+            <Cpu :size="14" />
+            <span>Pilihan perangkat</span>
+          </p>
           <h2 id="catalog-grid">Katalog elektronik Eco-Share</h2>
         </div>
         <p class="muted">Filter kategori ringan, kartu lebih informatif, siap lanjut ke detail barang.</p>
@@ -108,13 +129,22 @@
 
       <section class="catalog-cta card">
         <div>
-          <p class="eyebrow">Butuh akses penuh?</p>
+          <p class="eyebrow">
+            <CircleUserRound :size="14" />
+            <span>Butuh akses penuh?</span>
+          </p>
           <h2>Daftar sebagai renter untuk kirim rental lebih cepat</h2>
           <p class="muted">Setelah login, kamu bisa buka detail barang, isi tanggal, lalu buat rental langsung dari halaman detail.</p>
         </div>
         <div class="actions actions--wrap">
-          <RouterLink class="btn btn--primary" to="/register">Daftar sekarang</RouterLink>
-          <RouterLink class="btn btn--ghost" to="/login">Login</RouterLink>
+          <RouterLink class="btn btn--primary btn--icon" to="/register">
+            <UserPlus :size="16" />
+            <span>Daftar sekarang</span>
+          </RouterLink>
+          <RouterLink class="btn btn--ghost btn--icon" to="/login">
+            <LogIn :size="16" />
+            <span>Login</span>
+          </RouterLink>
         </div>
       </section>
     </template>
@@ -122,6 +152,7 @@
 </template>
 
 <script setup>
+import { Boxes, CheckCircle2, CircleUserRound, Cpu, LayoutGrid, LogIn, PackageCheck, ScanSearch, Store, Tags, UserPlus, Wallet } from '@lucide/vue';
 import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { getItemsRequest } from '../../api/items';
