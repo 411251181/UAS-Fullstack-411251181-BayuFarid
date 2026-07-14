@@ -19,8 +19,7 @@
           <button class="btn btn--ghost btn--small" type="button" @click="handleLogout">Logout</button>
         </template>
         <template v-else>
-          <RouterLink class="header__link" to="/login">Login</RouterLink>
-          <RouterLink to="/register" class="btn btn--primary btn--small">Register</RouterLink>
+          <RouterLink to="/auth" class="btn btn--primary btn--small header__cta">Login / Register</RouterLink>
         </template>
       </nav>
     </div>
@@ -36,6 +35,6 @@ const router = useRouter();
 
 const handleLogout = () => {
   authStore.logout();
-  router.push('/login');
+  router.push('/auth');
 };
 </script>

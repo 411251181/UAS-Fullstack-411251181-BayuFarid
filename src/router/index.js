@@ -9,16 +9,30 @@ const routes = [
     meta: { public: true },
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/auth/LoginView.vue'),
+    path: '/auth',
+    name: 'auth',
+    component: () => import('../views/auth/AuthView.vue'),
     meta: { guestOnly: true },
   },
   {
+    path: '/login',
+    redirect: (to) => ({
+      name: 'auth',
+      query: {
+        ...to.query,
+        tab: 'login',
+      },
+    }),
+  },
+  {
     path: '/register',
-    name: 'register',
-    component: () => import('../views/auth/RegisterView.vue'),
-    meta: { guestOnly: true },
+    redirect: (to) => ({
+      name: 'auth',
+      query: {
+        ...to.query,
+        tab: 'register',
+      },
+    }),
   },
   {
     path: '/items/:id',
@@ -68,7 +82,7 @@ router.beforeEach(async (to) => {
   }
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    return { name: 'login', query: { redirect: to.fullPath } };
+    return { name: 'auth', query: { redirect: to.fullPath, tab: 'login' } };
   }
 
   if (to.meta.guestOnly && authStore.isAuthenticated) {
