@@ -519,7 +519,6 @@ Success criteria:
 - architecture direction chosen: preserve Vue architecture, migrate visual layer in batches
 
 ### Pending
-- refactor owner item dashboard
 - refactor renter rental history
 - derive and refactor owner rentals page
 - derive and refactor rental detail page
@@ -610,17 +609,24 @@ Note:
 - derived login page from same auth shell with role-aware messaging and lighter onboarding context
 - restyled auth forms with prominent role cards, guidance blocks, and stronger submit/footer hierarchy
 - verified Batch 3 with build, tests, and git status
+- completed Batch 4 owner inventory dashboard refactor in:
+  - `src/views/items/OwnerItemsView.vue`
+  - `src/components/forms/ItemForm.vue`
+  - `src/assets/styles/main.css`
+- rebuilt owner inventory page into dashboard layout with stat cards, richer inventory table, and modal-like CRUD flow
+- refreshed item form into guided editor panel with status quick-select actions and clearer hierarchy
+- verified Batch 4 with build, tests, and git status
 
 ---
 
 ## 15. Next Recommended Action
-Start Batch 4:
-- refactor `src/views/items/OwnerItemsView.vue`
-- refactor `src/components/forms/ItemForm.vue`
-- add dashboard-style stats strip
-- move CRUD flow toward modal or modal-like panel
+Start Batch 5:
+- refactor `src/views/rentals/MyRentalsView.vue`
+- derive `src/views/rentals/OwnerRentalsView.vue`
+- refactor `src/views/rentals/RentalDetailView.vue`
+- align rental states to shared status-driven dashboard language
 
 Reason:
-- Batch 3 auth pages finished and verified
-- owner inventory now biggest dashboard gap versus desktop reference
-- owner item management has strongest next leverage for shared admin patterns
+- Batch 4 owner inventory dashboard finished and verified
+- rental history and detail flows now biggest mismatch versus remaining reference set
+- rental pages can reuse dashboard stats, chips, and card/table patterns established in prior batches

@@ -1,6 +1,14 @@
 <template>
-  <form class="form" @submit.prevent="submitForm">
+  <form class="form item-form-panel" @submit.prevent="submitForm">
     <BaseAlert :message="errorMessage" />
+
+    <div class="item-form-panel__hero">
+      <div>
+        <p class="eyebrow">Inventory editor</p>
+        <h3>Susun detail barang dengan rapi</h3>
+      </div>
+      <p class="muted">Nama, harga, stok, dan status langsung dipakai untuk katalog dan transaksi rental.</p>
+    </div>
 
     <label>
       Nama Barang
@@ -12,7 +20,7 @@
       <textarea v-model="localForm.description" rows="4" required></textarea>
     </label>
 
-    <div class="form-grid">
+    <div class="form-grid item-form-panel__grid">
       <label>
         Kategori
         <input v-model="localForm.category" type="text" required />
@@ -38,7 +46,34 @@
       </label>
     </div>
 
-    <div class="actions">
+    <div class="item-form-status-row">
+      <button
+        type="button"
+        class="catalog-chip"
+        :class="{ 'catalog-chip--active': localForm.status === 'AVAILABLE' }"
+        @click="localForm.status = 'AVAILABLE'"
+      >
+        AVAILABLE
+      </button>
+      <button
+        type="button"
+        class="catalog-chip"
+        :class="{ 'catalog-chip--active': localForm.status === 'UNAVAILABLE' }"
+        @click="localForm.status = 'UNAVAILABLE'"
+      >
+        UNAVAILABLE
+      </button>
+      <button
+        type="button"
+        class="catalog-chip"
+        :class="{ 'catalog-chip--active': localForm.status === 'INACTIVE' }"
+        @click="localForm.status = 'INACTIVE'"
+      >
+        INACTIVE
+      </button>
+    </div>
+
+    <div class="actions item-form-panel__footer">
       <button class="btn btn--primary" type="submit" :disabled="loading">
         {{ loading ? 'Menyimpan...' : submitLabel }}
       </button>
