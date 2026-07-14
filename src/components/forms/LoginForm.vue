@@ -5,12 +5,12 @@
     <div class="auth-form-panel__group">
       <label>
         Email
-        <input v-model="form.email" type="email" placeholder="owner@example.com" required />
+        <input v-model="form.email" type="email" placeholder="owner@example.com" autocomplete="email" required />
       </label>
 
       <label>
         Password
-        <input v-model="form.password" type="password" placeholder="Minimal 6 karakter" required />
+        <input v-model="form.password" type="password" placeholder="Minimal 6 karakter" autocomplete="current-password" required />
       </label>
     </div>
 
@@ -35,27 +35,35 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import BaseAlert from '../common/BaseAlert.vue';
+
+const props = defineProps({
+  errorMessage: {
+    type: String,
+    default: '',
+  },
+});
 
 const emit = defineEmits(['submit']);
 const loading = ref(false);
-const errorMessage = ref('');
+const errorMessage = ref(props.errorMessage);
 const form = reactive({
   email: '',
   password: '',
 });
 
+watch(
+  () => props.errorMessage,
+  (value) => {
+    errorMessage.value = value;
+    loading.value = false;
+  },
+);
+
 const submitForm = async () => {
   errorMessage.value = '';
   loading.value = true;
-
-  try {
-    await emit('submit', { ...form });
-  } catch (error) {
-    errorMessage.value = error.message;
-  } finally {
-    loading.value = false;
-  }
+  emit('submit', { ...form });
 };
 </script>

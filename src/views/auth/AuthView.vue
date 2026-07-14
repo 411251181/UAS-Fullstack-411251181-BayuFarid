@@ -47,15 +47,15 @@
       </div>
 
       <div class="auth-panel-shell__body">
-        <LoginForm v-if="activeTab === 'login'" @submit="handleLogin" />
-        <RegisterForm v-else @submit="handleRegister" />
+        <LoginForm v-if="activeTab === 'login'" :error-message="loginErrorMessage" @submit="handleLogin" />
+        <RegisterForm v-else :error-message="registerErrorMessage" @submit="handleRegister" />
       </div>
     </BaseCard>
   </section>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import BaseCard from '../../components/common/BaseCard.vue';
 import LoginForm from '../../components/forms/LoginForm.vue';
@@ -65,10 +65,15 @@ import { useAuthStore } from '../../stores/auth';
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
+const loginErrorMessage = ref('');
+const registerErrorMessage = ref('');
 
 const activeTab = computed(() => (route.query.tab === 'register' ? 'register' : 'login'));
 
 const setTab = (tab) => {
+  loginErrorMessage.value = '';
+  registerErrorMessage.value = '';
+
   router.replace({
     name: 'auth',
     query: {
@@ -81,12 +86,24 @@ const setTab = (tab) => {
 const resolveFallback = () => (authStore.user?.role === 'OWNER' ? '/dashboard/owner/items' : '/dashboard/rentals');
 
 const handleLogin = async (payload) => {
-  await authStore.login(payload);
-  router.push(route.query.redirect || resolveFallback());
+  loginErrorMessage.value = '';
+
+  try {
+    await authStore.login(payload);
+    router.push(route.query.redirect || resolveFallback());
+  } catch (error) {
+    loginErrorMessage.value = error.message;
+  }
 };
 
 const handleRegister = async (payload) => {
-  await authStore.register(payload);
-  router.push(route.query.redirect || resolveFallback());
+  registerErrorMessage.value = '';
+
+  try {
+    await authStore.register(payload);
+    router.push(route.query.redirect || resolveFallback());
+  } catch (error) {
+    registerErrorMessage.value = error.message;
+  }
 };
 </script>
