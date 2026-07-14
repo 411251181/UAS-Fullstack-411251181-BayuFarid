@@ -334,7 +334,3 @@ Requirement soal meminta minimal 3 commit dengan pesan standar. Perubahan lokal 
 1. `feat: initialize vue frontend architecture`
 2. `feat: add auth item and rental flows`
 3. `docs: add frontend setup and integration guide`
-
-## Penutup
-
-Frontend ini disusun end-to-end berdasarkan analisis [`task.md`](./task.md) dan backend [`UTS-Fullstack-411251181-BayuFarid`](../UTS-Fullstack-411251181-BayuFarid/README.md), sehingga alur autentikasi, role access, integrasi data, transaksi rental, dan dokumentasi siap dijalankan serta dinilai.
