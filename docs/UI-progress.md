@@ -519,9 +519,6 @@ Success criteria:
 - architecture direction chosen: preserve Vue architecture, migrate visual layer in batches
 
 ### Pending
-- refactor renter rental history
-- derive and refactor owner rentals page
-- derive and refactor rental detail page
 - run build/test after each major batch
 - run `git status` after changes
 
@@ -616,17 +613,26 @@ Note:
 - rebuilt owner inventory page into dashboard layout with stat cards, richer inventory table, and modal-like CRUD flow
 - refreshed item form into guided editor panel with status quick-select actions and clearer hierarchy
 - verified Batch 4 with build, tests, and git status
+- completed Batch 5 rental page refactor in:
+  - `src/views/rentals/MyRentalsView.vue`
+  - `src/views/rentals/OwnerRentalsView.vue`
+  - `src/views/rentals/RentalDetailView.vue`
+  - `src/assets/styles/main.css`
+- rebuilt renter rental history into stat-led dashboard cards with clearer status actions and detail entrypoints
+- derived owner rental monitoring page from same dashboard language with summary stats and richer transaction table
+- refactored rental detail into hero plus audit layout while preserving renter-only return and cancel actions
+- verified Batch 5 with build, tests, and git status
 
 ---
 
 ## 15. Next Recommended Action
-Start Batch 5:
-- refactor `src/views/rentals/MyRentalsView.vue`
-- derive `src/views/rentals/OwnerRentalsView.vue`
-- refactor `src/views/rentals/RentalDetailView.vue`
-- align rental states to shared status-driven dashboard language
+Start Batch 6:
+- polish responsive edge cases across migrated pages
+- restyle remaining empty/loading/error states where needed
+- run final build/test sweep
+- review final `git status` summary
 
 Reason:
-- Batch 4 owner inventory dashboard finished and verified
-- rental history and detail flows now biggest mismatch versus remaining reference set
-- rental pages can reuse dashboard stats, chips, and card/table patterns established in prior batches
+- Batch 5 rental pages finished and verified
+- remaining work is consistency cleanup across batches, not new route migration
+- final pass can reuse design tokens and patterns already established in Batches 1-5

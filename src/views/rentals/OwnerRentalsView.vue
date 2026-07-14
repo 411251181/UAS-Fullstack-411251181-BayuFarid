@@ -1,10 +1,30 @@
 <template>
-  <section class="stack-lg">
-    <div class="section-heading">
-      <p class="eyebrow">Dashboard Owner</p>
-      <h1>Transaksi Barang Saya</h1>
-      <p class="muted">Pantau seluruh rental untuk barang yang Anda miliki.</p>
-    </div>
+  <section class="owner-dashboard stack-lg">
+    <section class="section-heading stack-lg">
+      <div>
+        <p class="eyebrow">Dashboard Owner</p>
+        <h1>Transaksi Barang Saya</h1>
+        <p class="muted">Pantau rental masuk, status berjalan, dan nilai transaksi barang milik owner.</p>
+      </div>
+      <div class="owner-stats-grid rental-stats-grid">
+        <div class="owner-stat-card">
+          <span>Total transaksi</span>
+          <strong>{{ rentals.length }}</strong>
+        </div>
+        <div class="owner-stat-card">
+          <span>Pending</span>
+          <strong>{{ pendingCount }}</strong>
+        </div>
+        <div class="owner-stat-card">
+          <span>Active</span>
+          <strong>{{ activeCount }}</strong>
+        </div>
+        <div class="owner-stat-card owner-stat-card--accent">
+          <span>Nilai transaksi</span>
+          <strong>{{ totalValue }}</strong>
+        </div>
+      </div>
+    </section>
 
     <BaseAlert :message="errorMessage" />
     <LoadingSpinner v-if="loading" label="Memuat transaksi owner..." />
@@ -14,26 +34,47 @@
       description="Transaksi akan muncul ketika penyewa membuat rental pada barang milik Anda."
     />
 
-    <div v-else class="table-card">
-      <table class="table">
+    <section v-else class="owner-table-shell table-card">
+      <div class="owner-table-shell__header">
+        <div>
+          <p class="eyebrow">Ringkasan transaksi</p>
+          <h2>Daftar rental barang owner</h2>
+        </div>
+        <div class="catalog-chip-row">
+          <span class="catalog-chip catalog-chip--active">{{ rentals.length }} transaksi</span>
+          <span class="catalog-chip">{{ activeCount }} active</span>
+        </div>
+      </div>
+
+      <table class="table owner-table">
         <thead>
           <tr>
             <th>Barang</th>
             <th>Penyewa</th>
-            <th>Jumlah</th>
             <th>Periode</th>
             <th>Status</th>
             <th>Total</th>
-            <th>Detail</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="row in rentals" :key="row.id">
-            <td>{{ row.item.name }}</td>
-            <td>{{ row.renter.name }}</td>
-            <td>{{ row.quantity }}</td>
+            <td>
+              <div class="owner-table__item">
+                <strong>{{ row.item.name }}</strong>
+                <span>{{ row.item.category }} · {{ row.quantity }} unit</span>
+              </div>
+            </td>
+            <td>
+              <div class="owner-table__item">
+                <strong>{{ row.renter.name }}</strong>
+                <span>{{ row.renter.email }}</span>
+              </div>
+            </td>
             <td>{{ formatDate(row.startDate) }} - {{ formatDate(row.endDate) }}</td>
-            <td>{{ row.status }}</td>
+            <td>
+              <span :class="['item-chip', statusChipClass(row.status)]">{{ row.status }}</span>
+            </td>
             <td>{{ formatCurrency(row.totalPrice) }}</td>
             <td>
               <RouterLink class="btn btn--ghost btn--small" :to="`/rentals/${row.id}`">Lihat</RouterLink>
@@ -41,12 +82,12 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </section>
   </section>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { getOwnerRentalsRequest } from '../../api/rentals';
 import BaseAlert from '../../components/common/BaseAlert.vue';
@@ -58,6 +99,17 @@ import { formatCurrency, formatDate } from '../../utils/format';
 const rentals = ref([]);
 const loading = ref(true);
 const errorMessage = ref('');
+
+const pendingCount = computed(() => rentals.value.filter((rental) => rental.status === 'PENDING').length);
+const activeCount = computed(() => rentals.value.filter((rental) => rental.status === 'ACTIVE').length);
+const totalValue = computed(() => formatCurrency(rentals.value.reduce((sum, rental) => sum + Number(rental.totalPrice || 0), 0)));
+
+const statusChipClass = (status) => ({
+  ACTIVE: 'item-chip--success',
+  PENDING: 'item-chip--pending',
+  RETURNED: 'item-chip--muted',
+  CANCELLED: 'item-chip--danger',
+}[status] || 'item-chip--muted');
 
 const loadRentals = async () => {
   loading.value = true;

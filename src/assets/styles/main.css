@@ -758,6 +758,21 @@ textarea {
   gap: 1rem;
 }
 
+.rental-history-list,
+.rental-history-card,
+.rental-history-card__main,
+.rental-history-card__summary,
+.rental-history-card__meta,
+.rental-history-card__actions,
+.rental-detail-summary,
+.rental-detail-content,
+.rental-detail-contact-grid,
+.rental-detail-stat-row,
+.rental-detail-timeline {
+  display: grid;
+  gap: 1rem;
+}
+
 .auth-split-layout {
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: 1.5rem;
@@ -946,6 +961,83 @@ textarea {
   justify-content: flex-start;
 }
 
+.item-chip--pending {
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+}
+
+.item-chip--danger {
+  background: rgba(186, 26, 26, 0.12);
+  color: var(--danger);
+}
+
+.rental-history-list {
+  gap: 1.25rem;
+}
+
+.rental-history-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.rental-history-card--cancelled {
+  opacity: 0.76;
+}
+
+.rental-history-card__summary,
+.rental-history-card__actions {
+  align-items: center;
+}
+
+.rental-history-card__summary {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.rental-history-card__meta {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.rental-history-card__meta span,
+.rental-history-card__price span,
+.rental-detail-period-note p,
+.rental-detail-timeline small {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.rental-history-card__meta strong,
+.rental-detail-contact-grid dd {
+  margin: 0.35rem 0 0;
+  display: block;
+}
+
+.rental-history-card__actions {
+  justify-items: end;
+}
+
+.rental-detail-hero__media {
+  align-content: space-between;
+}
+
+.rental-detail-summary {
+  padding: 1.5rem;
+}
+
+.rental-detail-contact-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.rental-detail-content {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+  align-items: start;
+}
+
+.rental-detail-timeline {
+  padding-left: 1.25rem;
+}
+
 .table th,
 .table td {
   text-align: left;
@@ -989,7 +1081,12 @@ textarea {
   .auth-form-panel__footer,
   .owner-stats-grid,
   .owner-table-shell__header,
-  .item-form-panel__grid {
+  .item-form-panel__grid,
+  .rental-history-card,
+  .rental-history-card__summary,
+  .rental-history-card__meta,
+  .rental-detail-contact-grid,
+  .rental-detail-content {
     grid-template-columns: 1fr;
   }
 }
@@ -1037,8 +1134,14 @@ textarea {
   .catalog-hero__preview-meta,
   .item-detail-sticky-bar,
   .rental-form-panel__summary,
-  .item-form-panel__footer {
+  .item-form-panel__footer,
+  .rental-history-card__summary,
+  .rental-history-card__actions {
     align-items: stretch;
+  }
+
+  .rental-history-card__actions {
+    justify-items: stretch;
   }
 
   .owner-modal-shell {
