@@ -519,10 +519,6 @@ Success criteria:
 - architecture direction chosen: preserve Vue architecture, migrate visual layer in batches
 
 ### Pending
-- create shared Stitch-like CSS token layer in actual app
-- refactor layout shell
-- refactor catalog page
-- refactor item detail page
 - refactor register/login pages
 - refactor owner item dashboard
 - refactor renter rental history
@@ -597,17 +593,26 @@ Note:
 - switched global visual system to light Stitch-style baseline
 - added responsive shared footer and refined top navigation grouping
 - fixed input surfaces so forms now match light shell direction
+- completed Batch 2 public discovery flow in:
+  - `src/views/items/PublicItemsView.vue`
+  - `src/components/items/ItemCard.vue`
+  - `src/views/items/ItemDetailView.vue`
+  - `src/components/forms/RentalForm.vue`
+- rebuilt public catalog into Stitch-style hero, chip filters, richer cards, and CTA section
+- aligned item detail hierarchy to reference-inspired media, stats, rental panel, and sticky action bar
+- refreshed rental form presentation without changing backend payload flow
+- verified Batch 2 with build, tests, and git status
 
 ---
 
 ## 15. Next Recommended Action
-Start Batch 2:
-- refactor `src/views/items/PublicItemsView.vue`
-- refactor `src/components/items/ItemCard.vue`
-- refactor `src/views/items/ItemDetailView.vue`
-- adjust rental UI presentation only where needed to match reference structure
+Start Batch 3:
+- refactor `src/views/auth/RegisterView.vue`
+- refactor `src/views/auth/LoginView.vue`
+- refactor `src/components/forms/RegisterForm.vue`
+- refactor `src/components/forms/LoginForm.vue`
 
 Reason:
-- Batch 1 baseline shell finished
-- public discovery flow now highest-priority visible gap versus reference
-- item catalog and item detail carry strongest Stitch reference coverage
+- Batch 2 public discovery flow finished and verified
+- auth pages now biggest visible mismatch against Stitch reference family
+- register reference already provides clearest next reusable auth pattern

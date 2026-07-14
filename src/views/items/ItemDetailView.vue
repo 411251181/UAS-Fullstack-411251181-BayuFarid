@@ -1,54 +1,110 @@
 <template>
-  <section class="stack-lg">
+  <section class="item-detail-page stack-lg">
     <BaseAlert :message="errorMessage" />
     <LoadingSpinner v-if="loading" label="Memuat detail barang..." />
 
     <template v-else-if="item">
-      <BaseCard>
-        <div class="detail-header">
-          <div>
-            <p class="badge">{{ item.category }}</p>
+      <section class="item-detail-hero card">
+        <div class="item-detail-hero__media">
+          <div class="item-detail-hero__chip-row">
+            <span class="item-chip item-chip--soft">{{ item.category }}</span>
+            <span :class="['item-chip', availabilityClass]">{{ availabilityLabel }}</span>
+          </div>
+          <div class="item-detail-hero__media-copy">
+            <p class="item-detail-hero__eyebrow">Detail Barang</p>
             <h1>{{ item.name }}</h1>
             <p class="muted">{{ item.description }}</p>
           </div>
-          <div class="price-panel">
-            <strong>{{ formatCurrency(item.dailyPrice) }}</strong>
-            <span>/hari</span>
+        </div>
+
+        <div class="item-detail-hero__summary">
+          <div class="item-detail-hero__title-row">
+            <div>
+              <p class="item-detail-hero__owner-label">Disediakan oleh</p>
+              <h2>{{ item.owner?.name || 'Owner Eco-Share' }}</h2>
+            </div>
+            <div class="item-detail-hero__price">
+              <strong>{{ formatCurrency(item.dailyPrice) }}</strong>
+              <span>/hari</span>
+            </div>
           </div>
-        </div>
 
-        <dl class="meta-grid">
-          <div><dt>Stok</dt><dd>{{ item.stock }}</dd></div>
-          <div><dt>Status</dt><dd>{{ item.status }}</dd></div>
-          <div><dt>Pemilik</dt><dd>{{ item.owner?.name }}</dd></div>
-          <div><dt>Email Pemilik</dt><dd>{{ item.owner?.email }}</dd></div>
-        </dl>
-      </BaseCard>
+          <div class="item-detail-stat-row">
+            <div class="item-detail-stat-card">
+              <span>Stok aktif</span>
+              <strong>{{ item.stock }}</strong>
+            </div>
+            <div class="item-detail-stat-card">
+              <span>Status</span>
+              <strong>{{ item.status }}</strong>
+            </div>
+          </div>
 
-      <BaseCard v-if="authStore.isAuthenticated && authStore.isRenter && item.status === 'AVAILABLE' && item.stock > 0">
-        <div class="section-heading">
-          <h2>Buat Rental</h2>
-          <p class="muted">Backend akan validasi stok, role, dan tanggal rental.</p>
+          <dl class="item-detail-owner-grid">
+            <div>
+              <dt>Email owner</dt>
+              <dd>{{ item.owner?.email || '-' }}</dd>
+            </div>
+            <div>
+              <dt>Kategori</dt>
+              <dd>{{ item.category }}</dd>
+            </div>
+          </dl>
         </div>
-        <BaseAlert :message="successMessage" variant="success" />
-        <RentalForm :item-id="Number(item.id)" :max-stock="Number(item.stock)" @submit="handleCreateRental" />
-      </BaseCard>
+      </section>
 
-      <BaseCard v-else>
-        <div class="empty-state left">
-          <h3>Informasi Akses</h3>
-          <p v-if="!authStore.isAuthenticated">Login sebagai RENTER untuk membuat rental.</p>
-          <p v-else-if="authStore.isOwner">Akun OWNER tidak bisa membuat rental.</p>
-          <p v-else>Barang tidak dapat dirental saat ini karena stok atau status tidak memenuhi syarat.</p>
+      <section class="item-detail-content">
+        <BaseCard>
+          <div class="section-heading">
+            <p class="eyebrow">Ringkasan rental</p>
+            <h2>Atur tanggal dan jumlah perangkat</h2>
+            <p class="muted">Validasi stok, role, dan tanggal tetap diproses backend saat submit.</p>
+          </div>
+          <BaseAlert :message="successMessage" variant="success" />
+          <RentalForm
+            v-if="canRent"
+            :item-id="Number(item.id)"
+            :max-stock="Number(item.stock)"
+            @submit="handleCreateRental"
+          />
+          <div v-else class="item-detail-access-note">
+            <h3>Informasi akses</h3>
+            <p v-if="!authStore.isAuthenticated">Login sebagai RENTER untuk membuat rental dari barang ini.</p>
+            <p v-else-if="authStore.isOwner">Akun OWNER tidak bisa membuat rental.</p>
+            <p v-else>Barang belum bisa dirental karena stok habis atau status belum AVAILABLE.</p>
+          </div>
+        </BaseCard>
+
+        <aside class="item-detail-sidebar">
+          <BaseCard>
+            <div class="section-heading">
+              <p class="eyebrow">Kenapa pilih Eco-Share</p>
+              <h3>Flow singkat sebelum checkout</h3>
+            </div>
+            <ol class="item-detail-checklist">
+              <li>Pilih jumlah unit sesuai stok tersedia.</li>
+              <li>Tentukan tanggal mulai dan tanggal selesai.</li>
+              <li>Kirim rental lalu lanjut ke halaman detail transaksi.</li>
+            </ol>
+          </BaseCard>
+        </aside>
+      </section>
+
+      <section class="item-detail-sticky-bar">
+        <div>
+          <span>{{ availabilityLabel }}</span>
+          <strong>{{ formatCurrency(item.dailyPrice) }}/hari</strong>
         </div>
-      </BaseCard>
+        <a v-if="canRent" class="btn btn--primary" href="#rental-form">Buat rental</a>
+        <RouterLink v-else class="btn btn--ghost" to="/login">Login renter</RouterLink>
+      </section>
     </template>
   </section>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { computed, onMounted, ref } from 'vue';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { getItemDetailRequest } from '../../api/items';
 import { createRentalRequest } from '../../api/rentals';
 import BaseAlert from '../../components/common/BaseAlert.vue';
@@ -66,6 +122,25 @@ const item = ref(null);
 const loading = ref(true);
 const errorMessage = ref('');
 const successMessage = ref('');
+
+const canRent = computed(() => (
+  authStore.isAuthenticated
+  && authStore.isRenter
+  && item.value?.status === 'AVAILABLE'
+  && Number(item.value?.stock) > 0
+));
+
+const availabilityLabel = computed(() => (
+  item.value?.status === 'AVAILABLE' && Number(item.value?.stock) > 0
+    ? 'Siap dirental'
+    : 'Belum tersedia'
+));
+
+const availabilityClass = computed(() => (
+  item.value?.status === 'AVAILABLE' && Number(item.value?.stock) > 0
+    ? 'item-chip--success'
+    : 'item-chip--muted'
+));
 
 const loadItem = async () => {
   loading.value = true;

@@ -1,8 +1,19 @@
 <template>
-  <form class="form" @submit.prevent="submitForm">
+  <form id="rental-form" class="form rental-form-panel" @submit.prevent="submitForm">
     <BaseAlert :message="errorMessage" />
 
-    <div class="form-grid">
+    <div class="rental-form-panel__summary">
+      <div>
+        <span>Stok tersedia</span>
+        <strong>{{ maxStock }} unit</strong>
+      </div>
+      <div>
+        <span>Minimum rental</span>
+        <strong>1 hari</strong>
+      </div>
+    </div>
+
+    <div class="form-grid rental-form-panel__grid">
       <label>
         Jumlah
         <input v-model.number="form.quantity" type="number" min="1" :max="maxStock" required />
@@ -19,9 +30,12 @@
       </label>
     </div>
 
-    <button class="btn btn--primary" type="submit" :disabled="loading">
-      {{ loading ? 'Memproses...' : 'Buat Rental' }}
-    </button>
+    <div class="rental-form-panel__footer">
+      <p class="muted">Pastikan tanggal sesuai kebutuhan. Backend akan cek ketersediaan final saat submit.</p>
+      <button class="btn btn--primary" type="submit" :disabled="loading">
+        {{ loading ? 'Memproses...' : 'Buat Rental' }}
+      </button>
+    </div>
   </form>
 </template>
 
