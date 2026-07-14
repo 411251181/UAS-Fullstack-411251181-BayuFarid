@@ -519,7 +519,6 @@ Success criteria:
 - architecture direction chosen: preserve Vue architecture, migrate visual layer in batches
 
 ### Pending
-- refactor register/login pages
 - refactor owner item dashboard
 - refactor renter rental history
 - derive and refactor owner rentals page
@@ -602,17 +601,26 @@ Note:
 - aligned item detail hierarchy to reference-inspired media, stats, rental panel, and sticky action bar
 - refreshed rental form presentation without changing backend payload flow
 - verified Batch 2 with build, tests, and git status
+- completed Batch 3 auth page refactor in:
+  - `src/views/auth/RegisterView.vue`
+  - `src/views/auth/LoginView.vue`
+  - `src/components/forms/RegisterForm.vue`
+  - `src/components/forms/LoginForm.vue`
+- converted register page into split onboarding layout with clearer role guidance
+- derived login page from same auth shell with role-aware messaging and lighter onboarding context
+- restyled auth forms with prominent role cards, guidance blocks, and stronger submit/footer hierarchy
+- verified Batch 3 with build, tests, and git status
 
 ---
 
 ## 15. Next Recommended Action
-Start Batch 3:
-- refactor `src/views/auth/RegisterView.vue`
-- refactor `src/views/auth/LoginView.vue`
-- refactor `src/components/forms/RegisterForm.vue`
-- refactor `src/components/forms/LoginForm.vue`
+Start Batch 4:
+- refactor `src/views/items/OwnerItemsView.vue`
+- refactor `src/components/forms/ItemForm.vue`
+- add dashboard-style stats strip
+- move CRUD flow toward modal or modal-like panel
 
 Reason:
-- Batch 2 public discovery flow finished and verified
-- auth pages now biggest visible mismatch against Stitch reference family
-- register reference already provides clearest next reusable auth pattern
+- Batch 3 auth pages finished and verified
+- owner inventory now biggest dashboard gap versus desktop reference
+- owner item management has strongest next leverage for shared admin patterns
