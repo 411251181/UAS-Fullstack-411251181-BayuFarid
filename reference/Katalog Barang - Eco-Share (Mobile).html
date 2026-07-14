@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eco-Share | Katalog Barang</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f2f4f6",
+                    "surface-container-highest": "#e0e3e5",
+                    "primary": "#006c49",
+                    "tertiary-container": "#fc7c78",
+                    "on-tertiary-container": "#711419",
+                    "on-primary-fixed-variant": "#005236",
+                    "on-primary-container": "#00422b",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container": "#eceef0",
+                    "on-tertiary-fixed-variant": "#842225",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-bright": "#f7f9fb",
+                    "surface": "#f7f9fb",
+                    "on-secondary-container": "#5c647a",
+                    "background": "#f7f9fb",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "secondary-fixed": "#dae2fd",
+                    "secondary": "#565e74",
+                    "inverse-primary": "#4edea3",
+                    "primary-fixed-dim": "#4edea3",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#bbcabf",
+                    "tertiary-fixed-dim": "#ffb3af",
+                    "on-primary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "primary-fixed": "#6ffbbe",
+                    "tertiary-fixed": "#ffdad7",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#002113",
+                    "primary-container": "#10b981",
+                    "on-surface": "#191c1e",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "surface-dim": "#d8dadc",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#131b2e",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#410005",
+                    "tertiary": "#a43a3a",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#3c4a42",
+                    "outline": "#6c7a71",
+                    "inverse-surface": "#2d3133",
+                    "surface-tint": "#006c49",
+                    "secondary-container": "#dae2fd",
+                    "surface-variant": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "margin-desktop": "32px",
+                    "container-max": "1280px",
+                    "2xl": "48px",
+                    "md": "16px",
+                    "base": "4px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "xl": "32px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-xl-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-xl-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- Top Navigation Bar (Shared Component Strategy) -->
+<nav class="sticky top-0 z-50 bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-md max-w-container-max mx-auto w-full">
+<span class="text-headline-lg font-headline-lg font-bold text-primary dark:text-primary-fixed-dim">Eco-Share</span>
+<div class="flex items-center gap-sm">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="px-margin-mobile pt-lg max-w-container-max mx-auto">
+<!-- Welcome & Filters -->
+<header class="mb-xl">
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface mb-xs">Katalog Barang</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Temukan barang elektronik untuk disewa dengan mudah.</p>
+<div class="flex gap-sm mt-lg overflow-x-auto pb-sm no-scrollbar">
+<button class="bg-primary text-on-primary px-lg py-xs rounded-full font-label-md text-label-md whitespace-nowrap">Semua</button>
+<button class="bg-surface-container-high text-on-surface-variant px-lg py-xs rounded-full font-label-md text-label-md whitespace-nowrap">Laptop</button>
+<button class="bg-surface-container-high text-on-surface-variant px-lg py-xs rounded-full font-label-md text-label-md whitespace-nowrap">Kamera</button>
+<button class="bg-surface-container-high text-on-surface-variant px-lg py-xs rounded-full font-label-md text-label-md whitespace-nowrap">Audio</button>
+</div>
+</header>
+<!-- Vertical Product List (Bento-ish Vertical Stack) -->
+<div class="space-y-gutter">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col transition-all active:scale-[0.98] active:opacity-90">
+<div class="relative w-full h-48">
+<img class="w-full h-full object-cover" data-alt="A sleek professional silver Macbook Pro laptop placed on a clean white minimalist desk, surrounded by eco-friendly office plants. High-key natural lighting illuminates the metallic texture of the device, creating a premium and reliable aesthetic. The background is a soft-focus modern workspace in a corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2jUw2M4HBMk3IFIaIi_0GUdh0G8vvGx_Ng4IclF3FZ6rwayE6SGcdqvLpM0rAjNGOHqNd3UXeaTemf7inGsiJWcEVCONOJ_v6FNs6EWgYH7Z_Nl9K8rWUwljGxUF44acfv79IHd8uk9Up-4W11o9I8R3BiFUZdsKLxa06unm5073wNtOlihZh35oopEKGcZ2jPs1voEOBY1cx7hQasyMPk5XliKV267Eo3hOroIXSxjtphAd-71kc"/>
+<div class="absolute top-md left-md bg-primary-container/90 backdrop-blur-md px-sm py-xs rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-md font-label-md text-on-primary-container uppercase">AVAILABLE</span>
+</div>
+</div>
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">MacBook Pro M2 2023</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Laptop &amp; Productivity</p>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-primary">Rp250k</p>
+<p class="font-label-md text-label-md text-on-surface-variant">/ hari</p>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-sm mt-xs">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">inventory_2</span>
+<span class="font-body-sm text-body-sm text-on-surface">Stok: 3 Unit</span>
+</div>
+<button class="bg-primary text-on-primary px-xl py-sm rounded-lg font-label-md text-label-md hover:bg-on-primary-fixed-variant transition-colors">
+                            Sewa Sekarang
+                        </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col transition-all active:scale-[0.98] active:opacity-90">
+<div class="relative w-full h-48">
+<img class="w-full h-full object-cover" data-alt="A professional Sony Alpha mirrorless camera with a high-end lens positioned on a dark wooden studio table. Soft cinematic side-lighting emphasizes the camera's intricate buttons and glass lens reflections. The overall mood is sophisticated and tech-forward, matching a clean light-mode interface with a corporate green accent." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6oaL8lm5fLeTU_4cx1CKIX1yifhZYiTsl_rI-S5SPFFVSPNHrihQrT4aIWJ_8TbiOpLV_q2jVAKtYYRetPrz8HCHoy_XXWnqFy6PaBdRakjx3R4IHneTq-rHQVHyOYwNVSHpaA0L-k-iG7uf64A6Wf-K7VCTLA74u5AxDo8CjJiRtN-tvNlq1WhBQCEAXpHCmwazMXL_gvRnmQWf0U8ymelIPaX_aTECOKbey3UXloNpOotPo3Ds0"/>
+<div class="absolute top-md left-md bg-secondary-container/90 backdrop-blur-md px-sm py-xs rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-secondary-container text-[16px]">schedule</span>
+<span class="text-label-md font-label-md text-on-secondary-container uppercase">UNAVAILABLE</span>
+</div>
+</div>
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Sony A7 IV Body</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Photography &amp; Video</p>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-primary">Rp400k</p>
+<p class="font-label-md text-label-md text-on-surface-variant">/ hari</p>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-sm mt-xs">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">inventory_2</span>
+<span class="font-body-sm text-body-sm text-on-surface">Stok: 0 Unit</span>
+</div>
+<button class="bg-surface-container-highest text-on-surface-variant px-xl py-sm rounded-lg font-label-md text-label-md cursor-not-allowed">
+                            Penuh
+                        </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col transition-all active:scale-[0.98] active:opacity-90">
+<div class="relative w-full h-48">
+<img class="w-full h-full object-cover" data-alt="Premium noise-canceling over-ear headphones in a stylish matte black finish, resting on a minimalist white headphone stand. The lighting is crisp and even, highlighting the sleek contours and sustainable material build. The setting is a bright, airy living space that exudes a sense of modern comfort and professional quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7vFnA-rJqOftgPWXdvGPyBBBYISobq2sBBrZry2sY0jfdlJw0D3rbPKctUHxRD9zieMxBzlXqfWPcK_RMJgCv2BqKVcCT7IYZhC6q7VsYfSqOuqtu8ExiynyMGNm8LgOKtjDsFqK9h6GBPsteLYrpH_y76B0E7PU65l8bfy6ZhZCp9LfYvgb9UfpLZoDlVPMWaJKm_vDKSPZOVPnuZzmBTq3uj8LaNFvmC8zjSxzL1Gu7lvhZ3aPe"/>
+<div class="absolute top-md left-md bg-primary-container/90 backdrop-blur-md px-sm py-xs rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-label-md font-label-md text-on-primary-container uppercase">AVAILABLE</span>
+</div>
+</div>
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Sony WH-1000XM5</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Audio &amp; Accessories</p>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-primary">Rp85k</p>
+<p class="font-label-md text-label-md text-on-surface-variant">/ hari</p>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-sm mt-xs">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">inventory_2</span>
+<span class="font-body-sm text-body-sm text-on-surface">Stok: 12 Unit</span>
+</div>
+<button class="bg-primary text-on-primary px-xl py-sm rounded-lg font-label-md text-label-md hover:bg-on-primary-fixed-variant transition-colors">
+                            Sewa Sekarang
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Responsive Pivot) -->
+<nav class="fixed bottom-0 left-0 right-0 bg-surface-container-lowest border-t border-outline-variant px-md py-sm md:hidden z-50">
+<div class="flex justify-around items-center">
+<a class="flex flex-col items-center gap-xs text-primary transition-all scale-95 opacity-80" href="#">
+<span class="material-symbols-outlined active-tab">dashboard</span>
+<span class="font-label-md text-[10px]">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">inventory</span>
+<span class="font-label-md text-[10px]">My Items</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-[10px]">My Rentals</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-md text-[10px]">Profile</span>
+</a>
+</div>
+</nav>
+<!-- Floating Action Button (Optional Contextual) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary-container text-on-primary-container rounded-2xl shadow-lg flex items-center justify-center transition-transform active:scale-90 z-40">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<script>
+        // Subtle micro-interactions for active state feedback
+        document.querySelectorAll('button:not([disabled])').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('opacity-80', 'scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('opacity-80', 'scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('opacity-80', 'scale-95');
+            });
+        });
+
+        // Hide scrollbar utility for filter row
+        const filterRow = document.querySelector('.overflow-x-auto');
+        let isDown = false;
+        letstartX;
+        let scrollLeft;
+
+        filterRow.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - filterRow.offsetLeft;
+            scrollLeft = filterRow.scrollLeft;
+        });
+        filterRow.addEventListener('mouseleave', () => isDown = false);
+        filterRow.addEventListener('mouseup', () => isDown = false);
+        filterRow.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - filterRow.offsetLeft;
+            const walk = (x - startX) * 2;
+            filterRow.scrollLeft = scrollLeft - walk;
+        });
+    </script>
+</body></html>

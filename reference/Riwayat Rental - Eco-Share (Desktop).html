@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eco-Share | Riwayat Rental Saya</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-low": "#f2f4f6",
+                "surface-container-highest": "#e0e3e5",
+                "primary": "#006c49",
+                "tertiary-container": "#fc7c78",
+                "on-tertiary-container": "#711419",
+                "on-primary-fixed-variant": "#005236",
+                "on-primary-container": "#00422b",
+                "surface-container-high": "#e6e8ea",
+                "surface-container": "#eceef0",
+                "on-tertiary-fixed-variant": "#842225",
+                "inverse-on-surface": "#eff1f3",
+                "surface-bright": "#f7f9fb",
+                "surface": "#f7f9fb",
+                "on-secondary-container": "#5c647a",
+                "background": "#f7f9fb",
+                "secondary-fixed-dim": "#bec6e0",
+                "secondary-fixed": "#dae2fd",
+                "secondary": "#565e74",
+                "inverse-primary": "#4edea3",
+                "primary-fixed-dim": "#4edea3",
+                "on-error": "#ffffff",
+                "outline-variant": "#bbcabf",
+                "tertiary-fixed-dim": "#ffb3af",
+                "on-primary": "#ffffff",
+                "on-background": "#191c1e",
+                "primary-fixed": "#6ffbbe",
+                "tertiary-fixed": "#ffdad7",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-fixed": "#002113",
+                "primary-container": "#10b981",
+                "on-surface": "#191c1e",
+                "on-secondary-fixed-variant": "#3f465c",
+                "surface-dim": "#d8dadc",
+                "error-container": "#ffdad6",
+                "on-secondary-fixed": "#131b2e",
+                "on-error-container": "#93000a",
+                "on-tertiary": "#ffffff",
+                "error": "#ba1a1a",
+                "on-tertiary-fixed": "#410005",
+                "tertiary": "#a43a3a",
+                "on-secondary": "#ffffff",
+                "on-surface-variant": "#3c4a42",
+                "outline": "#6c7a71",
+                "inverse-surface": "#2d3133",
+                "surface-tint": "#006c49",
+                "secondary-container": "#dae2fd",
+                "surface-variant": "#e0e3e5"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xs": "4px",
+                "lg": "24px",
+                "sm": "8px",
+                "margin-desktop": "32px",
+                "container-max": "1280px",
+                "2xl": "48px",
+                "md": "16px",
+                "base": "4px",
+                "gutter": "16px",
+                "margin-mobile": "16px",
+                "xl": "32px"
+            },
+            "fontFamily": {
+                "headline-lg": ["Inter"],
+                "headline-md": ["Inter"],
+                "headline-xl": ["Inter"],
+                "body-sm": ["Inter"],
+                "body-md": ["Inter"],
+                "body-lg": ["Inter"],
+                "label-md": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-md max-w-container-max mx-auto w-full">
+<!-- Brand Logo -->
+<div class="text-headline-lg font-headline-lg font-bold text-primary dark:text-primary-fixed-dim">
+                Eco-Share
+            </div>
+<!-- Desktop Navigation Links -->
+<div class="hidden md:flex items-center space-x-xl">
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200" href="#">My Items</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary dark:border-primary-fixed-dim pb-1 transition-colors duration-200" href="#">My Rentals</a>
+</div>
+<!-- Actions/Profile -->
+<div class="flex items-center gap-md">
+<div class="relative group hidden md:block">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">search</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-label-md">
+                        JD
+                    </div>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-grow max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-xl">
+<!-- Header Section -->
+<header class="mb-2xl">
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-sm">Riwayat Rental Saya</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Kelola transaksi penyewaan barang elektronik ramah lingkungan Anda di sini. Pantau status aktif dan riwayat masa lalu.</p>
+</header>
+<!-- Filters & Stats Bento Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md mb-xl">
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl flex items-center gap-md">
+<div class="bg-primary/10 p-sm rounded-lg">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant">TOTAL RENTAL</p>
+<p class="text-headline-md font-headline-md">12 Items</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl flex items-center gap-md">
+<div class="bg-blue-500/10 p-sm rounded-lg">
+<span class="material-symbols-outlined text-blue-600">sync_alt</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant">ACTIVE</p>
+<p class="text-headline-md font-headline-md">3 Items</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl flex items-center gap-md">
+<div class="bg-tertiary-container/10 p-sm rounded-lg">
+<span class="material-symbols-outlined text-tertiary">history</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant">COMPLETED</p>
+<p class="text-headline-md font-headline-md">8 Items</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl flex items-center gap-md">
+<div class="bg-error/10 p-sm rounded-lg">
+<span class="material-symbols-outlined text-error">cancel</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant">CANCELLED</p>
+<p class="text-headline-md font-headline-md">1 Item</p>
+</div>
+</div>
+</div>
+<!-- Transaction List -->
+<div class="space-y-md">
+<!-- Rental Card: ACTIVE -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-sm transition-all duration-200">
+<div class="flex flex-col md:flex-row items-center p-md md:p-lg gap-lg">
+<div class="w-full md:w-40 h-40 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional product photograph of a high-end solar-powered portable power station sitting on a clean, white surface. The device features a minimalist dark gray design with green accents and an integrated LED display showing power levels. The lighting is bright and even, highlighting the sleek texture and modern aesthetic of Eco-Share electronics. The overall mood is reliable and technologically advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA60TmE5cNEHZZLeublftVTkwWwl6UE22FH6rQeap3xJqaa2ONVg9LIQqoRMA-1rMVNWxne2gmJAbxxkqNvaR7aM1TP3FaKtRakFdJZar58831Ca_3u4bV7oZze0fxA1WN92_qT1WSBKCa8Il3MZpE9Taq6L8qe8lC0MenB_qB_ksk6i5Va-d0nM7cjs-pT6cqjnG4SttNX6iiwby5uIxbCK2Pk2bYz-GaiCXnIO9l7hdosEQi6pOzP"/>
+</div>
+<div class="flex-grow space-y-xs">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background">Solar Power Station 500W</h3>
+<p class="text-label-md font-label-md text-primary bg-primary/10 inline-block px-sm py-xs rounded uppercase mt-xs">ACTIVE</p>
+</div>
+<div class="text-right">
+<p class="text-label-md font-label-md text-on-surface-variant">Total Harga</p>
+<p class="font-headline-md text-headline-md text-primary">Rp 450.000</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-xl mt-md">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span> Periode Rental
+                                </p>
+<p class="font-body-md text-body-md text-on-surface">15 Okt - 22 Okt 2023</p>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Lokasi Pickup
+                                </p>
+<p class="font-body-md text-body-md text-on-surface">Eco-Hub Jakarta Selatan</p>
+</div>
+</div>
+</div>
+<div class="w-full md:w-auto flex md:flex-col gap-sm">
+<button class="flex-grow md:w-32 bg-primary text-white py-sm rounded-lg font-label-md hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-xs active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[18px]">keyboard_return</span> Return
+                        </button>
+<button class="flex-grow md:w-32 border border-outline text-on-surface-variant py-sm rounded-lg font-label-md hover:bg-surface-container-high transition-colors flex items-center justify-center gap-xs">
+                            Details
+                        </button>
+</div>
+</div>
+</div>
+<!-- Rental Card: PENDING -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-sm transition-all duration-200">
+<div class="flex flex-col md:flex-row items-center p-md md:p-lg gap-lg">
+<div class="w-full md:w-40 h-40 rounded-lg overflow-hidden flex-shrink-0 opacity-80">
+<img class="w-full h-full object-cover" data-alt="A studio shot of a pair of high-fidelity noise-canceling headphones made from recycled plastics. The headphones have a sophisticated matte black finish with subtle eco-green detailing on the earcups. They are placed on a minimalist glass pedestal against a soft slate-blue background. High-key professional lighting creates crisp highlights, emphasizing the premium quality and sustainable design of the electronic hardware." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrv-WoHAtgufFxYLU7zJQeRkWCUqFE5T-Cpmvr3DV4Zea0WbtepLrTQN4aFx8fQcWs-3KOngF4SFXNjmK3Fm5iSgM40V2qvT0el_j19w-AtS2atiLRmnzaH7YCZ7VV4GiKllKVJLf0JD34r4FJoFxxi7vRy2uuH1Sw-iCzvk1EHciFC1UZaezIav935KUnt3t7iGqEmdgjOzOqPb_bafGDb5-3nW6pv4LHPwQGPt73VX_8GbtTH2Na"/>
+</div>
+<div class="flex-grow space-y-xs">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background">Eco-Fidelity Headphones V2</h3>
+<p class="text-label-md font-label-md text-secondary bg-secondary/10 inline-block px-sm py-xs rounded uppercase mt-xs">PENDING</p>
+</div>
+<div class="text-right">
+<p class="text-label-md font-label-md text-on-surface-variant">Total Harga</p>
+<p class="font-headline-md text-headline-md text-on-surface">Rp 120.000</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-xl mt-md">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span> Periode Rental
+                                </p>
+<p class="font-body-md text-body-md text-on-surface">25 Okt - 28 Okt 2023</p>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">info</span> Status Bayar
+                                </p>
+<p class="font-body-md text-body-md text-on-surface">Menunggu Verifikasi</p>
+</div>
+</div>
+</div>
+<div class="w-full md:w-auto flex md:flex-col gap-sm">
+<button class="flex-grow md:w-32 border border-error text-error py-sm rounded-lg font-label-md hover:bg-error/5 transition-colors flex items-center justify-center gap-xs active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[18px]">close</span> Cancel
+                        </button>
+<button class="flex-grow md:w-32 border border-outline text-on-surface-variant py-sm rounded-lg font-label-md hover:bg-surface-container-high transition-colors flex items-center justify-center gap-xs">
+                            Details
+                        </button>
+</div>
+</div>
+</div>
+<!-- Rental Card: CANCELLED -->
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-xl overflow-hidden opacity-75 grayscale-[0.5]">
+<div class="flex flex-col md:flex-row items-center p-md md:p-lg gap-lg">
+<div class="w-full md:w-40 h-40 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A sleek electric scooter for urban commuting, shown from a side profile in a bright, modern studio. The scooter features a lightweight aluminum frame with sustainable bamboo footdeck and integrated digital display. The lighting is clean and professional, creating a corporate reliability feel. The background is a soft neutral grey, highlighting the product as an efficient green transportation solution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBK3rk7dfWQ8KOs1si9nxlKGXF2X3gfrTvm_M91ODtY89r4CGO7pPWJBlqOYP1lBb3yY468MWS8_Mxn43lX8lA-Lbt6qxKzIHQ8lheNqbBgH8L3Dv-GZHhDvhiVpNxbHAIv1uRV8kLCnXP8ARERzA7xFNBlFhSZiDtTGp2ksDrsB4x-b_fVRvc93bMS_igiFMndeBT02Qsb7o7Jc9B7robBoHbKNVlAunvfeOmD_KiyyaAM8e0Ku2g"/>
+</div>
+<div class="flex-grow space-y-xs">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface-variant">Urban E-Scooter Eco S1</h3>
+<p class="text-label-md font-label-md text-on-surface-variant bg-surface-container-highest inline-block px-sm py-xs rounded uppercase mt-xs">CANCELLED</p>
+</div>
+<div class="text-right">
+<p class="text-label-md font-label-md text-on-surface-variant">Total Harga</p>
+<p class="font-headline-md text-headline-md text-on-surface-variant">Rp 75.000</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-xl mt-md">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span> Periode Rental
+                                </p>
+<p class="font-body-md text-body-md text-on-surface-variant line-through">01 Okt - 03 Okt 2023</p>
+</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">event_busy</span> Alasan Batal
+                                </p>
+<p class="font-body-md text-body-md text-on-surface-variant italic">User Cancellation</p>
+</div>
+</div>
+</div>
+<div class="w-full md:w-auto flex md:flex-col gap-sm">
+<button class="flex-grow md:w-32 border border-outline text-on-surface-variant/50 py-sm rounded-lg font-label-md cursor-not-allowed">
+                            Re-book
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-high dark:bg-surface-dim border-t border-outline-variant dark:border-outline mt-2xl">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-xl max-w-container-max mx-auto w-full gap-lg">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+                Eco-Share
+            </div>
+<div class="flex flex-wrap justify-center gap-lg">
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-on-surface-variant underline transition-all duration-200" href="#">About Us</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-on-surface-variant underline transition-all duration-200" href="#">Sustainability</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-on-surface-variant underline transition-all duration-200" href="#">Terms of Service</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-on-surface-variant underline transition-all duration-200" href="#">Privacy Policy</a>
+<a class="text-label-md font-label-md text-on-surface-variant dark:text-surface-variant hover:text-on-surface dark:hover:text-on-surface-variant underline transition-all duration-200" href="#">Contact</a>
+</div>
+<div class="text-body-sm font-body-sm text-on-secondary-container opacity-70">
+                © 2024 Eco-Share. All rights reserved.
+            </div>
+</div>
+</footer>
+<!-- Simple Micro-interaction Script -->
+<script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                if(!button.disabled) button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>
