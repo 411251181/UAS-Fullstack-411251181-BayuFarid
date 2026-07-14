@@ -1,6 +1,6 @@
 # Eco-Share Frontend
 
-Frontend web application untuk platform penyewaan alat elektronik bekas **Eco-Share**. Project ini dibangun dengan Vue 3 dan terintegrasi dengan backend repository [`UTS-Fullstack-411251181-BayuFarid`](../UTS-Fullstack-411251181-BayuFarid/README.md) melalui REST API berbasis Express, Prisma, MySQL, JWT, dan middleware otorisasi role.
+Frontend web application untuk platform penyewaan alat elektronik bekas **Eco-Share**. Project ini dibangun dengan Vue 3 dan terintegrasi dengan backend repository [`UTS-Fullstack-411251181-BayuFarid`](../UTS-Fullstack-411251181-BayuFarid/README.md) melalui REST API berbasis Express, Prisma, Supabase Postgres, JWT, dan middleware otorisasi role.
 
 ## Tujuan Project
 
@@ -259,7 +259,7 @@ npm run test
 ## Integrasi dengan Backend
 
 1. Jalankan backend lebih dulu pada repository [`UTS-Fullstack-411251181-BayuFarid`](../UTS-Fullstack-411251181-BayuFarid/README.md).
-2. Pastikan database MySQL dan migration backend sudah siap.
+2. Pastikan koneksi Supabase Postgres dan migration backend sudah siap.
 3. Pastikan backend aktif pada `http://localhost:3000` atau sesuaikan [`VITE_API_BASE_URL`](.env.example).
 4. Jalankan frontend.
 5. Register akun `OWNER` dan `RENTER`, lalu uji alur item dan rental.
