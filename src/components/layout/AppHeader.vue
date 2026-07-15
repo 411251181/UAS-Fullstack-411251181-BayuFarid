@@ -49,7 +49,11 @@
     </div>
   </header>
 
-  <nav class="mobile-bottom-nav" aria-label="Navigasi utama mobile">
+  <nav
+    class="mobile-bottom-nav"
+    :style="{ gridTemplateColumns: `repeat(${mobileNavItems.length}, minmax(0, 1fr))` }"
+    aria-label="Navigasi utama mobile"
+  >
     <RouterLink
       v-for="item in mobileNavItems"
       :key="item.label"
@@ -87,15 +91,17 @@ const mobileNavItems = computed(() => {
     ];
   }
 
-  return [
-    { to: '/', label: 'Katalog', icon: LayoutGrid },
-    authStore.isOwner
-      ? { to: '/dashboard/owner/items', label: 'My Items', icon: PackageSearch }
-      : { to: '/dashboard/rentals', label: 'My Rentals', icon: ReceiptText },
-    authStore.isOwner
-      ? { to: '/dashboard/owner/rentals', label: 'Rentals', icon: ReceiptText }
-      : { to: '/dashboard/rentals', label: 'Rentals', icon: ReceiptText },
-    { to: '/auth', label: 'Logout', icon: LogOut, variant: 'danger', action: handleLogout },
-  ];
+  return authStore.isOwner
+    ? [
+        { to: '/', label: 'Katalog', icon: LayoutGrid },
+        { to: '/dashboard/owner/items', label: 'My Items', icon: PackageSearch },
+        { to: '/dashboard/owner/rentals', label: 'Rentals', icon: ReceiptText },
+        { to: '/auth', label: 'Logout', icon: LogOut, variant: 'danger', action: handleLogout },
+      ]
+    : [
+        { to: '/', label: 'Katalog', icon: LayoutGrid },
+        { to: '/dashboard/rentals', label: 'My Rentals', icon: ReceiptText },
+        { to: '/auth', label: 'Logout', icon: LogOut, variant: 'danger', action: handleLogout },
+      ];
 });
 </script>
