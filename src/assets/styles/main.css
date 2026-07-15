@@ -189,14 +189,29 @@ body,
 
 .header__cta {
   background: linear-gradient(135deg, #0f9f6e, #16b67f);
-  border-color: rgba(4, 107, 73, 0.16);
+  color: #ffffff !important;
+  border: 1px solid rgba(4, 107, 73, 0.16);
   box-shadow: 0 12px 24px rgba(15, 159, 110, 0.18);
 }
 
-.header__cta:hover {
+.header__cta:hover,
+.header__cta:focus-visible,
+.header__cta.router-link-active {
   background: linear-gradient(135deg, #11aa76, #149f70);
+  color: #ffffff !important;
   border-color: rgba(4, 107, 73, 0.2);
   box-shadow: 0 14px 28px rgba(15, 159, 110, 0.22);
+}
+
+.header__cta:active {
+  background: linear-gradient(135deg, #0c8f63, #12895f);
+  color: #ffffff !important;
+  border-color: rgba(4, 107, 73, 0.24);
+}
+
+.header__cta span,
+.header__cta svg {
+  color: inherit;
 }
 
 .header__link {

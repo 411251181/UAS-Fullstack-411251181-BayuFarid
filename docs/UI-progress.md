@@ -630,6 +630,11 @@ Note:
 - tightened responsive behavior for dashboard headers, action stacks, and shared state blocks on tablet/mobile widths
 - verified Batch 6 with build, tests, and git status
 
+### 2026-07-15
+- refined navbar guest CTA contrast in `src/assets/styles/main.css`
+- enforced bright text for `Login / Register` CTA in normal, hover, focus-visible, active, and active-route states
+- kept CTA icon/text color inherited from button so navbar styling stays consistent and readable
+
 ---
 
 ## 15. Next Recommended Action
