@@ -48,9 +48,24 @@
       </nav>
     </div>
   </header>
+
+  <nav class="mobile-bottom-nav" aria-label="Navigasi utama mobile">
+    <RouterLink
+      v-for="item in mobileNavItems"
+      :key="item.label"
+      :to="item.to"
+      class="mobile-bottom-nav__item"
+      :class="{ 'mobile-bottom-nav__item--danger': item.variant === 'danger' }"
+      @click="item.action?.()"
+    >
+      <component :is="item.icon" :size="18" />
+      <span>{{ item.label }}</span>
+    </RouterLink>
+  </nav>
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import { BadgeCheck, CircleUserRound, LayoutGrid, LogOut, MonitorSmartphone, PackageSearch, ReceiptText } from '@lucide/vue';
 import { useRouter, RouterLink } from 'vue-router';
 import { useAuthStore } from '../../stores/auth';
@@ -62,4 +77,25 @@ const handleLogout = () => {
   authStore.logout();
   router.push('/auth');
 };
+
+const mobileNavItems = computed(() => {
+  if (!authStore.isAuthenticated) {
+    return [
+      { to: '/', label: 'Katalog', icon: LayoutGrid },
+      { to: { name: 'auth', query: { tab: 'login' } }, label: 'Login', icon: CircleUserRound },
+      { to: { name: 'auth', query: { tab: 'register' } }, label: 'Register', icon: CircleUserRound },
+    ];
+  }
+
+  return [
+    { to: '/', label: 'Katalog', icon: LayoutGrid },
+    authStore.isOwner
+      ? { to: '/dashboard/owner/items', label: 'My Items', icon: PackageSearch }
+      : { to: '/dashboard/rentals', label: 'My Rentals', icon: ReceiptText },
+    authStore.isOwner
+      ? { to: '/dashboard/owner/rentals', label: 'Rentals', icon: ReceiptText }
+      : { to: '/dashboard/rentals', label: 'Rentals', icon: ReceiptText },
+    { to: '/auth', label: 'Logout', icon: LogOut, variant: 'danger', action: handleLogout },
+  ];
+});
 </script>

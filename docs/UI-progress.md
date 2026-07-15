@@ -634,6 +634,9 @@ Note:
 - refined navbar guest CTA contrast in `src/assets/styles/main.css`
 - enforced bright text for `Login / Register` CTA in normal, hover, focus-visible, active, and active-route states
 - kept CTA icon/text color inherited from button so navbar styling stays consistent and readable
+- simplified mobile header in `src/components/layout/AppHeader.vue` so top bar now shows brand only
+- moved mobile nav actions into bottom tab navigation with guest/auth state-aware routes and logout action
+- disabled sticky header behavior on mobile so header scrolls naturally with page content
 
 ---
 
