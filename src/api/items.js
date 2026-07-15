@@ -5,6 +5,11 @@ export const getItemsRequest = async () => {
   return data;
 };
 
+export const getCatalogSummaryRequest = async () => {
+  const { data } = await http.get('/items/summary/catalog');
+  return data;
+};
+
 export const getItemDetailRequest = async (id) => {
   const { data } = await http.get(`/items/${id}`);
   return data;

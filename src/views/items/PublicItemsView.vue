@@ -40,9 +40,9 @@
             <div class="catalog-highlight-card">
               <span class="catalog-highlight-card__value">
                 <Tags :size="18" />
-                <span>{{ categoryCount }}</span>
+                <span>{{ activeUserCount }}</span>
               </span>
-              <span class="catalog-highlight-card__label">Kategori tercatat</span>
+              <span class="catalog-highlight-card__label">User aktif total</span>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@
 import { Boxes, CheckCircle2, CircleUserRound, Cpu, LayoutGrid, LogIn, PackageCheck, ScanSearch, Store, Tags, UserPlus, Wallet } from '@lucide/vue';
 import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import { getItemsRequest } from '../../api/items';
+import { getCatalogSummaryRequest, getItemsRequest } from '../../api/items';
 import BaseAlert from '../../components/common/BaseAlert.vue';
 import BaseEmpty from '../../components/common/BaseEmpty.vue';
 import LoadingSpinner from '../../components/common/LoadingSpinner.vue';
@@ -167,6 +167,11 @@ const items = ref([]);
 const loading = ref(true);
 const errorMessage = ref('');
 const activeCategory = ref('Semua');
+const catalogSummary = ref({
+  availableItems: 0,
+  activeOwners: 0,
+  activeUsers: 0,
+});
 
 const categories = computed(() => [
   'Semua',
@@ -185,17 +190,21 @@ const featuredItem = computed(() => items.value[0] || null);
 const featuredDescription = computed(() => featuredItem.value?.description || 'Kurasi perangkat bekas yang masih layak pakai untuk kerja, belajar, dan kebutuhan rumah tangga.');
 const featuredPrice = computed(() => formatCurrency(featuredItem.value?.dailyPrice || 0));
 const featuredStock = computed(() => featuredItem.value?.stock ?? 0);
-const availableCount = computed(() => items.value.filter((item) => item.status === 'AVAILABLE' && Number(item.stock) > 0).length);
-const ownerCount = computed(() => new Set(items.value.map((item) => item.owner?.id || item.owner?.name).filter(Boolean)).size);
-const categoryCount = computed(() => new Set(items.value.map((item) => item.category).filter(Boolean)).size);
+const availableCount = computed(() => catalogSummary.value.availableItems || items.value.filter((item) => item.status === 'AVAILABLE' && Number(item.stock) > 0).length);
+const ownerCount = computed(() => catalogSummary.value.activeOwners || new Set(items.value.map((item) => item.owner?.id || item.owner?.name).filter(Boolean)).size);
+const activeUserCount = computed(() => catalogSummary.value.activeUsers || ownerCount.value);
 
 const loadItems = async () => {
   loading.value = true;
   errorMessage.value = '';
 
   try {
-    const response = await getItemsRequest();
-    items.value = response.data;
+    const [itemsResponse, summaryResponse] = await Promise.all([
+      getItemsRequest(),
+      getCatalogSummaryRequest(),
+    ]);
+    items.value = itemsResponse.data;
+    catalogSummary.value = summaryResponse.data;
   } catch (error) {
     errorMessage.value = extractApiError(error);
   } finally {
